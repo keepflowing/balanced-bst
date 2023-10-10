@@ -4,10 +4,12 @@
 export default class Node {
   /**
    * @param {*} data
+   * @param {Node} left
+   * @param {Node} right
    */
-  constructor(data = null) {
+  constructor(data = null, left = null, right = null) {
     this.data = data;
-    this.left = null;
-    this.right = null;
+    this.left = left;
+    this.right = right;
   }
 }

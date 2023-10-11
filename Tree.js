@@ -12,6 +12,21 @@ export default class Tree {
   }
 
   /**
+   *
+   * @param {*} node
+   * @return {*}
+   */
+  static nextMinValue(node) {
+    let minVal = node.data;
+    while (node.left != null) {
+      minVal = node.left.data;
+      node = node.left;
+    }
+    console.log(minVal);
+    return minVal;
+  }
+
+  /**
    * @param {array} arr
    * @param {int} start
    * @param {int} end
@@ -44,6 +59,34 @@ export default class Tree {
       root.left = this.insert(value, root.left);
     } else if (root.data < value) {
       root.right = this.insert(value, root.right);
+    }
+    return root;
+  }
+
+  /**
+   * @param {*} value
+   * @param {Node} root
+   * @return {Node}
+   */
+  static delete(value, root) {
+    if (!root) {
+      return null;
+    }
+
+    if (value < root.data) {
+      root.left = this.delete(value, root.left);
+    } else if (root.data < value) {
+      root.right = this.delete(value, root.right);
+    } else {
+      // Case where root has 0-1 children:
+      if (!root.left) {
+        return root.right;
+      } else if (!root.right) {
+        return root.left;
+      }
+      // Case where root has 2 children:
+      root.data = Tree.nextMinValue(root.right);
+      root.right = this.delete(root.data, root.right);
     }
     return root;
   }

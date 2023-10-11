@@ -29,4 +29,22 @@ export default class Tree {
     );
     return node;
   }
+
+  /**
+   * @param {*} value
+   * @param {Node} root
+   * @return {Node}
+   */
+  static insert(value, root) {
+    if (root === null) {
+      root = new Node(value);
+      return root;
+    }
+    if (value < root.data) {
+      root.left = this.insert(value, root.left);
+    } else if (root.data < value) {
+      root.right = this.insert(value, root.right);
+    }
+    return root;
+  }
 }

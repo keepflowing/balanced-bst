@@ -89,4 +89,23 @@ export default class Tree {
     }
     return root;
   }
+
+  /**
+   * Finds and returns node with value in Tree
+   * @param {*} value
+   * @param {Node} root
+   * @return {Node}
+   */
+  static find(value, root) {
+    if (!root) {
+      return null;
+    }
+
+    if (value < root.data) {
+      return find(value, root.left);
+    } else if (root.data < value) {
+      return this.find(value, root.right);
+    }
+    return root;
+  }
 }

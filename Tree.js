@@ -12,8 +12,8 @@ export default class Tree {
   }
 
   /**
-   *
-   * @param {*} node
+   * Find minimum value that is higher than the node data
+   * @param {Node} node
    * @return {*}
    */
   static nextMinValue(node) {
@@ -22,7 +22,6 @@ export default class Tree {
       minVal = node.left.data;
       node = node.left;
     }
-    console.log(minVal);
     return minVal;
   }
 

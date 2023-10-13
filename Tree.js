@@ -237,4 +237,28 @@ export default class Tree {
     if (count) return count;
     return Tree.depth(node, root.right, depth + 1);
   }
+
+  /**
+   * @param {Node} root
+   * @return {bool}
+   */
+  static isBalanced(root) {
+    if (!root) return true;
+
+    const heightDiff = Math.abs(
+        Tree.height(root.left) - Tree.height(root.right));
+    return (
+      heightDiff < 2 &&
+      Tree.isBalanced(root.left) &&
+      Tree.isBalanced(root.right));
+  }
+
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  rebalance(root) {
+    this.arr = Tree.inorder(root);
+    return this.buildTree();
+  }
 }

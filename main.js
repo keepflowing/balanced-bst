@@ -7,18 +7,5 @@ const tree = new Tree(sortedArr);
 const firstNode = tree.buildTree();
 prettyPrint(firstNode);
 
-// console.log(Tree.find(23, firstNode));
-/* console.log(Tree.levelOrder(firstNode, (node) => {
-  console.log(node.data);
-}));*/
-
-console.log(Tree.preorder(firstNode));
-
-Tree.preorder(firstNode, (node) => {
-  console.log(node.data);
-});
-
-console.log(Tree.postorder(firstNode));
-Tree.postorder(firstNode, (node) => {
-  console.log(node.data);
-});
+// console.log(Tree.height(firstNode));
+console.log(Tree.depth(Tree.find(42, firstNode), firstNode));

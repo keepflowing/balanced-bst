@@ -206,4 +206,35 @@ export default class Tree {
       }
     }
   }
+
+  /**
+   * @param {Node} node
+   * @return {int}
+   */
+  static height(node) {
+    if (!node) {
+      return 0;
+    }
+    const leftHeight = Tree.height(node.left);
+    const rightHeight = Tree.height(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  /**
+   * @param {Node} node
+   * @param {Node} root
+   * @param {int} depth
+   * @return {int}
+   */
+  static depth(node, root, depth = 0) {
+    if (!node) {
+      return null;
+    } else if (!root) {
+      return 0;
+    }
+    if (node.data === root.data) return depth;
+    const count = Tree.depth(node, root.left, depth + 1);
+    if (count) return count;
+    return Tree.depth(node, root.right, depth + 1);
+  }
 }

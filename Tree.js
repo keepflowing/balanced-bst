@@ -108,4 +108,27 @@ export default class Tree {
     }
     return root;
   }
+
+  /**
+   * @param {Node} root
+   * @param {function} callback
+   * @return {arr}
+   */
+  static levelOrder(root, callback = null) {
+    if (!root) {
+      return null;
+    }
+    const queue = [root];
+    const result = [];
+    while (queue.length) {
+      for (let i = 0; i < queue.length; i++) {
+        const current = queue.shift();
+        result.push(current.data);
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+        if (callback) callback(current);
+      }
+    }
+    if (!callback) return result;
+  }
 }

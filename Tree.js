@@ -131,4 +131,79 @@ export default class Tree {
     }
     if (!callback) return result;
   }
+
+  /**
+   * root left right
+   * @param {Node} node
+   * @param {function} callback
+   * @return {array}
+   */
+  static preorder(node, callback = null) {
+    if (!node) {
+      return null;
+    }
+    const stack = [node];
+    const result = [];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
+      if (callback) callback(node);
+      result.push(node.data);
+    }
+    if (!callback) return result;
+  }
+
+  /**
+   * left root right
+   * @param {Node} node
+   * @param {function} callback
+   * @param {array} result
+   * @return {array}
+   */
+  static inorder(node, callback = null, result = []) {
+    if (!node) {
+      return null;
+    }
+    Tree.inorder(node.left, callback, result);
+    if (callback) {
+      callback(node);
+    } else {
+      result.push(node.data);
+    }
+    Tree.inorder(node.right, callback, result);
+    if (!callback) return result;
+  }
+
+  /**
+   * left right root
+   * @param {Node} node
+   * @param {function} callback
+   * @return {array}
+   */
+  static postorder(node, callback = null) {
+    if (!node) {
+      return null;
+    }
+    const stack = [node];
+    let result = [];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+      result.push(node);
+    }
+    result = result.reverse();
+    if (!callback) {
+      const resultValues = [];
+      for (let i = 0; i < result.length; i++) {
+        resultValues.push(result[i].data);
+      }
+      return resultValues;
+    } else {
+      for (let i = 0; i < result.length; i++) {
+        callback(result[i]);
+      }
+    }
+  }
 }
